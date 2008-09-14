@@ -10,7 +10,7 @@
 
 == FEATURES/PROBLEMS:
 
- Gadgets supported (Mapthis):
+ Gadgets supported:
 
   * iPhone
   * PSP
@@ -26,15 +26,17 @@
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+  mapr <url from provider>
+  
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* hpricot
 
 == INSTALL:
 
  gem install nofxx-mapr -s http://gems.github.com
+ 
 
 == LICENSE:
 

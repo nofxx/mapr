@@ -1,0 +1,56 @@
+#!/usr/bin/env ruby
+#
+#  Created on 2008-9-9.
+#  Copyright (c) 2008. All rights reserved.
+
+begin
+  require 'rubygems'
+rescue LoadError
+  # no rubygems to load, so we fail silently
+end
+
+require 'optparse'
+require 'mapr'
+
+# NOTE: the option -p/--path= is given as an example, and should probably be replaced in your application.
+
+OPTIONS = {
+  :path     => '~'
+}
+MANDATORY_OPTIONS = %w(  )
+
+parser = OptionParser.new do |opts|
+  opts.banner = <<BANNER
+Download maps for offline usage.
+
+Usage: #{File.basename($0)} [options] path
+
+Options are:
+BANNER
+  opts.separator ""
+  opts.on("-f", "--format=TYPE", String,
+          "Format to export the map to. Options are: psp, iphone",
+          "Default: mapthis") { |OPTIONS[:format]| }
+  
+  
+  opts.on("-d", "--depth=TYPE", String,
+          "Depth of the map",
+          "Default: 8") { |OPTIONS[:depth]| }
+          
+  opts.on("-t", "--type=TYPE", String,
+          "Format to export the map to. Options are: Map, Hybrid and Terrain",
+          "Default: map") { |OPTIONS[:type]| }   
+                 
+  opts.on("-h", "--help",
+          "Show this help message.") { puts opts; exit }
+          
+  opts.on("-v", "--version",
+          "Show program version") {   puts "Mapr v#{Mapr::VERSION::STRING}"; exit }          
+  opts.parse!(ARGV)
+
+  if MANDATORY_OPTIONS && MANDATORY_OPTIONS.find { |option| OPTIONS[option.to_sym].nil? }
+    puts opts; exit
+  end
+end
+
+Mapr::Bin.run! ARGV, OPTIONS[:format], OPTIONS[:type], OPTIONS[:depth]
