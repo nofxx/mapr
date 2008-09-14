@@ -1,10 +1,47 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
+module YmapsSpecHelper
+  def attr_valid_ymaps
+   {
+     :url => "http://us.i1.yimg.com/us.yimg.com/i/ww/rb/br/br_newlogonight_1.1.gif",
+     :x => -6.664608,
+     :y => -56.887207,
+     :z => 6,
+     :filename => "mapx/tile.jpg"     
+   }
+  end
+end
+
+describe Providers do
+  include YmapsSpecHelper
+
+
+
+
+  describe " to ymaps" do
+    
+    before(:each) do
+      @map = Map.new(attr_valid_ymaps.with(:url => nil))
+    end
+    
+    it "should generate a valid yahoo url" do
+    
+      @map.to_ymaps.should eql('http://maps.yahoo.com/#mvt=m&lat=-6.664608&lon=-56.887207&zoom=6')
+    
+    end
+    
+  end
 
 
 
 
 
+
+
+end
+
+
+# => http://maps.yahoo.com/#mvt=m&lat=-6.664608&lon=-56.887207&zoom=6
 #
 #
 #
