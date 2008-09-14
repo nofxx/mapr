@@ -1,6 +1,6 @@
 module Mapr
   module Providers
-    def parse_lmaps
+    def from_lmaps
       
       
     end

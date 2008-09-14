@@ -8,13 +8,15 @@ module Mapr
       @url = args[:url]
       @filename = args[:filename]
       @points = args[:points]
-      @raw = File.open(@url).read           
     end
     
+    def raw
+      @raw ||=  open(@url).read
+    end       
     # Save the tile to the disk
     # 'b' for binary mode (needed in winshit)
     def write_down!      
-      File.open(@filename, "wb").write(@raw)
+      File.open(@filename, "wb").write(raw)
     end    
   end
 end

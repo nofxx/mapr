@@ -1,6 +1,6 @@
 module Mapr
   module Providers
-    def parse_ymaps
+    def from_ymaps
       
       tiles = []
       
